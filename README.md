@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/mradeybee/highflyers.svg?style=svg)](https://circleci.com/gh/mradeybee/highflyers)
+
 # README
 
 This README would normally document whatever steps are necessary to get the
