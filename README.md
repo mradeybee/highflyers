@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/mradeybee/highflyers.svg?style=svg)](https://circleci.com/gh/mradeybee/highflyers)
+[![Master Build Status](https://travis-ci.com/mradeybee/highflyers.svg?branch=master)](https://travis-ci.com/mradeybee/highflyers)
 
 # README
 
