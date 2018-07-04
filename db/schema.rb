@@ -10,17 +10,60 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180704053551) do
+ActiveRecord::Schema.define(version: 20180704134228) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "users", force: :cascade do |t|
+  create_table "courses", force: :cascade do |t|
+    t.string "name"
+    t.bigint "teacher_id"
+    t.string "code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["teacher_id"], name: "index_courses_on_teacher_id"
+  end
+
+  create_table "student_courses", force: :cascade do |t|
+    t.bigint "student_id"
+    t.bigint "course_id"
+    t.bigint "teacher_id"
+    t.integer "score"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_student_courses_on_course_id"
+    t.index ["student_id"], name: "index_student_courses_on_student_id"
+    t.index ["teacher_id"], name: "index_student_courses_on_teacher_id"
+  end
+
+  create_table "students", force: :cascade do |t|
     t.string "name"
     t.string "email"
-    t.integer "role"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  create_table "teacher_ratings", force: :cascade do |t|
+    t.bigint "student_id"
+    t.bigint "teacher_id"
+    t.integer "rating"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["student_id"], name: "index_teacher_ratings_on_student_id"
+    t.index ["teacher_id"], name: "index_teacher_ratings_on_teacher_id"
+  end
+
+  create_table "teachers", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "courses", "teachers"
+  add_foreign_key "student_courses", "courses"
+  add_foreign_key "student_courses", "students"
+  add_foreign_key "student_courses", "teachers"
+  add_foreign_key "teacher_ratings", "students"
+  add_foreign_key "teacher_ratings", "teachers"
 end
