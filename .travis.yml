@@ -1,3 +1,6 @@
+env:
+  global:
+    - CC_TEST_REPORTER_ID=CODE_CLIMATE_ID
 language: ruby
 
 rvm:
@@ -17,3 +20,9 @@ script:
 before_script:
   - cp config/database.yml.travis config/database.yml
   - psql -c 'create database highflyer_test;' -U postgres
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
