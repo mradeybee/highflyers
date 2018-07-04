@@ -1,0 +1,20 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: 127.0.0.1
+  pool: 5
+
+development:
+  <<: *default
+  database: highflyer_development
+  username: postgres
+  password: password
+
+test:
+  <<: *default
+  database: highflyer_test
+  username: postgres
+  password: password
+
+production:
+  url: <%= ENV['DATABASE_URL'] %>

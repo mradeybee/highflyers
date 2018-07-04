@@ -1,3 +1,11 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :students, only: [:index, :create]
+
+  resources :teachers, only: [:index, :create]
+
+  resources :high_flyers, only: :show do
+    member do
+      post '/rate/:teacher_id', to: 'high_flyers#rate', as: :rate
+    end
+  end
 end
