@@ -1,0 +1,1 @@
+db:  bundle exec rails db:migrate
