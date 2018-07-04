@@ -8,34 +8,72 @@ RSpec.describe StudentsController, type: :controller do
       get :index
     end
 
-    it 'returns http success' do
-      expect(response).to have_http_status(:success)
+    it 'returns http ok status' do
+      expect(response).to have_http_status(:ok)
     end
 
     it 'returns students data' do
-      response_data = JSON.parse(response.body)
-      expect(response_data['students'].count).to eq 5
+      expect(JSON.parse(response.body)['students'].count).to eq 5
     end
   end
 
-
   describe 'POST #create' do
-    it_behaves_like 'a user controller with invalid create requests'
-
     context 'with valid parameters' do
-      before do
-        post :create, params: { name: 'Student Name', email: 'student@email.com' }
-      end
+      before { post :create, params: {name: 'Student Name', email: 'student@email.com'} }
 
-      it 'returns http success' do
-        expect(response).to have_http_status(:success)
+      it 'returns http created status' do
+        expect(response).to have_http_status(:created)
       end
 
       it 'returns student details' do
         response_data = JSON.parse(response.body)
+
         expect(response_data['student']['id'].present?).to be true
         expect(response_data['student']['name']).to eql 'Student Name'
         expect(response_data['student']['email']).to eql 'student@email.com'
+      end
+    end
+
+    context 'with invalid parameters' do
+      context 'empty parameters' do
+        before { post :create, params: {name: '', email: ''} }
+
+        it 'returns http unprocessable entity status' do
+          expect(response).to have_http_status(:unprocessable_entity)
+        end
+
+        it 'returns error details' do
+          response_data = JSON.parse(response.body)
+
+          expect(response_data['errors']).to include "Email can't be blank"
+          expect(response_data['errors']).to include "Name can't be blank"
+        end
+      end
+
+      context 'invalid emails' do
+        before { post :create, params: { name: 'User Name', email: 'useremail' } }
+
+        it 'returns http unprocessable entity status' do
+          expect(response).to have_http_status(:unprocessable_entity)
+        end
+
+        it 'returns error details' do
+          expect(JSON.parse(response.body)['errors']).to include 'Email is invalid'
+        end
+      end
+    end
+
+    context 'with existing email' do
+      let(:student) { Fabricate(:student) }
+
+      before { post :create, params: {name: 'New Student', email: student.email} }
+
+      it 'returns http unprocessable entity status' do
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
+
+      it 'returns error details' do
+        expect(JSON.parse(response.body)['errors']).to include 'Email has already been taken'
       end
     end
   end
