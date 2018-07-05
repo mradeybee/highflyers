@@ -1,40 +1,14 @@
 language: ruby
-
-rvm:
-  - 2.2
-
-env:
-  - DB=pgsql
-
-services:
-  - postgresql
-
-script:
-  - RAILS_ENV=test bundle exec rake db:migrate --trace
-  - bundle exec rake db:test:prepare
-  - bundle exec rake
-
+cache:
+- bundler
 before_script:
-  - cp config/database.yml.travis config/database.yml
-  - psql -c 'create database highflyer_test;' -U postgres
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
-
-after_script:
-  - ./cc-test-reporter after-build -t simplecov --exit-code $TRAVIS_TEST_RESULT
-
-env:
-  global:
-    - CC_TEST_REPORTER_ID=CODE_CLIMATE_ID
-    - CF_RUN_PERM_SPECS=false
-
-  matrix:
-    - COVERAGE=true DB=postgres TASKS=spec:all
-    - DB=pgsql TASKS=spec:all
-    - TASKS=rubocop
-
+- bundle exec rake db:create
+- bundle exec rake db:migrate
+- bundle exec rake assets:precompile
 deploy:
   provider: heroku
   api_key:
-    secure: HEROKU_API_KEY
+    secure: KEY
+  app: highflyers
+  on:
+    repo: mradeybee/highflyers
