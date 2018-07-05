@@ -10,5 +10,4 @@ deploy:
   api_key:
     secure: KEY
   app: highflyers
-  on:
-    repo: mradeybee/highflyers
+  on: master
