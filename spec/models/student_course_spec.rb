@@ -11,7 +11,6 @@ RSpec.describe StudentCourse, type: :model do
   end
 
   describe 'validations' do
-    it { should validate_presence_of(:score) }
     it { should validate_numericality_of(:score) }
     it { should validate_presence_of(:course_id) }
     it { should validate_presence_of(:teacher_id) }

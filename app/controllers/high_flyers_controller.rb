@@ -1,11 +1,14 @@
 class HighFlyersController < ApplicationController
   def show
-    highflyer = Highflyer.at_possision(highflyer_params[:id])
+    highflyer = Highflyer.at_position(highflyer_params[:id])
 
     if highflyer.present?
-      render json: {highflyer: highflyer}, status: :ok
+      render json: { highflyer: highflyer}, status: :ok
     else
-      render json: {message: 'There is no highflyer at this position'}, status: :not_found
+      render(
+        json: { message: 'There is no highflyer at this position' },
+        status: :not_found
+      )
     end
   end
 
@@ -17,9 +20,12 @@ class HighFlyersController < ApplicationController
     )
 
     if rating.errors.present?
-      render json: {errors: rating.errors.full_messages.join(', ')}, status: :unprocessable_entity
+      render(
+        json: { errors: rating.errors.full_messages.join(', ') },
+        status: :unprocessable_entity
+      )
     else
-      render json: {rating: rating}, status: :created
+      render json: { rating: rating }, status: :created
     end
   end
 
