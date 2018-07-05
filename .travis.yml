@@ -33,3 +33,8 @@ env:
     - COVERAGE=true DB=postgres TASKS=spec:all
     - DB=pgsql TASKS=spec:all
     - TASKS=rubocop
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: HEROKU_API_KEY
