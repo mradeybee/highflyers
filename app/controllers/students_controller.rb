@@ -1,22 +1,49 @@
 class StudentsController < ApplicationController
   def index
-    students = Student.all
-    render json: {students: students}, status: :ok
+    render json: { students: Student.all }, status: :ok
   end
 
   def create
     student = Student.create(students_params)
 
     if student.errors.present?
-      render json: {errors: student.errors.full_messages.join(', ')}, status: :unprocessable_entity
+      render(
+        json: { errors: student.errors.full_messages.join(', ') },
+        status: :unprocessable_entity
+      )
     else
-      render json: {student: student}, status: :created
+      render json: { student: student }, status: :created
+    end
+  end
+
+  def rate_teacher
+    rating = teacher_rating
+
+    if rating.errors.present?
+      render(
+        json: { errors: rating.errors.full_messages.join(', ') },
+        status: :unprocessable_entity
+      )
+    else
+      render json: { rating: rating }, status: :created
     end
   end
 
   private
 
   def students_params
-    params.permit(:id, :name, :email)
+    params.permit(:id, :name, :email, :course_id)
+  end
+
+  def teacher_rating_params
+    params.permit(:rating, :teacher_id)
+  end
+
+  def teacher_rating
+    TeacherRating.create(
+      student_id: students_params[:id],
+      teacher_id: teacher_rating_params[:teacher_id],
+      rating: teacher_rating_params[:rating]
+    )
   end
 end

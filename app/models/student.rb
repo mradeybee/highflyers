@@ -7,4 +7,12 @@ class Student < ApplicationRecord
 
   validates_presence_of :name, :email
   validates :email, uniqueness: true, format: { with: VALID_EMAIL_REGEX }
+
+  def highflyer?
+    student_courses.where('score >= ?', 80).detect do |course|
+      course.teacher_ratings.detect do |teacher_ratings|
+        teacher_ratings.rating >= 4
+      end.present?
+    end.present?
+  end
 end

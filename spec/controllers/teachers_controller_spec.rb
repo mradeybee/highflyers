@@ -19,7 +19,7 @@ RSpec.describe TeachersController, type: :controller do
 
   describe 'POST #create' do
     context 'with valid parameters' do
-      before { post :create, params: {name: 'Teacher Name', email: 'teacher@email.com'} }
+      before { post :create, params: { name: 'Teacher Name', email: 'teacher@email.com' } }
 
       it 'returns http created status' do
         expect(response).to have_http_status(:created)
@@ -35,7 +35,7 @@ RSpec.describe TeachersController, type: :controller do
 
     context 'with invalid parameters' do
       context 'empty parameters' do
-        before { post :create, params: {name: '', email: ''} }
+        before { post :create, params: { name: '', email: '' } }
 
         it 'returns http unprocessable entity status' do
           expect(response).to have_http_status(:unprocessable_entity)
@@ -50,7 +50,7 @@ RSpec.describe TeachersController, type: :controller do
       end
 
       context 'invalid emails' do
-        before { post :create, params: {name: 'User Name', email: 'useremail'} }
+        before { post :create, params: { name: 'User Name', email: 'useremail' } }
 
         it 'returns http unprocessable entity' do
           expect(response).to have_http_status(:unprocessable_entity)
@@ -65,7 +65,7 @@ RSpec.describe TeachersController, type: :controller do
     context 'with existing email' do
       let(:teacher) { Fabricate(:teacher) }
 
-      before { post :create, params: {name: 'New Student', email: teacher.email} }
+      before { post :create, params: { name: 'New Student', email: teacher.email } }
 
       it 'returns http unprocessable entity status' do
         expect(response).to have_http_status(:unprocessable_entity)
@@ -74,6 +74,29 @@ RSpec.describe TeachersController, type: :controller do
       it 'returns error details' do
         expect(JSON.parse(response.body)['errors']).to include 'Email has already been taken'
       end
+    end
+  end
+
+
+  describe 'POST #score_student' do
+    let(:teacher) { Fabricate(:teacher) }
+    let(:student) { Fabricate(:student) }
+    let(:course) { Fabricate(:course, teacher: teacher) }
+    let!(:student_course) { Fabricate(:student_course, student: student, teacher: teacher, course: course) }
+    let!(:teacher_rating) { Fabricate(:teacher_rating, student: student, teacher: teacher, rating: 5 ) }
+
+    before { post :score_student, params: { score: 70, student_id: student.id, id: teacher.id, course_id: course.id} }
+
+    it 'returns http ok status' do
+      expect(response).to have_http_status(:created)
+    end
+
+    it 'returns students data' do
+      response_data = JSON.parse(response.body)
+
+      expect(response_data['result']['student_id']).to eql student.id
+      expect(response_data['result']['teacher_id']).to eql teacher.id
+      expect(response_data['result']['score']).to eql 70
     end
   end
 end

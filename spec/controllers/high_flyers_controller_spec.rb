@@ -3,13 +3,13 @@ require 'rails_helper'
 RSpec.describe HighFlyersController, type: :controller do
   let(:teacher) { Fabricate(:teacher) }
   let(:student) { Fabricate(:student) }
-  let(:course) { Fabricate(:course) }
+  let!(:course) { Fabricate(:course, teacher: teacher) }
   let!(:student_course) { Fabricate(:student_course, student: student, teacher: teacher, score: 100, course: course) }
   let!(:teacher_rating) { Fabricate(:teacher_rating, student: student, teacher: teacher, rating: 5 ) }
 
   describe 'GET #show' do
     context 'available position' do
-      before { get :show, params: {id: 1} }
+      before { get :show, params: { id: 1 } }
 
       it 'returns http ok status' do
         expect(response).to have_http_status(:ok)
@@ -25,7 +25,7 @@ RSpec.describe HighFlyersController, type: :controller do
     end
 
     context 'unavailable position' do
-      before { get :show, params: {id: 50} }
+      before { get :show, params: { id: 50 } }
 
       it 'returns http not found status' do
         expect(response).to have_http_status(:not_found)
@@ -39,7 +39,7 @@ RSpec.describe HighFlyersController, type: :controller do
 
   describe 'POST #rate' do
     context 'valid data' do
-      before { post :rate, params: {id: 1, teacher_id: teacher.id, rating: 4} }
+      before { post :rate, params: { id: 1, teacher_id: teacher.id, rating: 2 } }
 
       it 'returns http created status' do
         expect(response).to have_http_status(:created)
@@ -50,13 +50,13 @@ RSpec.describe HighFlyersController, type: :controller do
 
         expect(response_data['rating']['student_id']).to eql student.id
         expect(response_data['rating']['teacher_id']).to eql teacher.id
-        expect(response_data['rating']['rating']).to eql 5
+        expect(response_data['rating']['rating']).to eql 4
       end
     end
 
     context 'invalid data' do
       context 'invalid teacher' do
-        before { post :rate, params: {id: 1, teacher_id: 12344433112223344433432, rating: 4} }
+        before { post :rate, params: { id: 1, teacher_id: 0, rating: 2 } }
 
         it 'returns http unprocessable entity status' do
           expect(response).to have_http_status(:unprocessable_entity)
@@ -72,7 +72,7 @@ RSpec.describe HighFlyersController, type: :controller do
       end
 
       context 'invalid highflyer position' do
-        before { post :rate, params: {id: 50, teacher_id: teacher.id, rating: 4} }
+        before { post :rate, params: { id: 50, teacher_id: teacher.id, rating: 4 } }
 
         it 'returns http unprocessable entity status' do
           expect(response).to have_http_status(:unprocessable_entity)
