@@ -1,7 +1,9 @@
 class Highflyer < Student
   default_scope {
     joins(:student_courses).joins(teachers: :teacher_ratings)
-    .where('student_courses.score >= ? AND (SELECT AVG(rating) FROM teacher_ratings) >= ?', 80, 1)
+    .having('AVG(teacher_ratings.rating) >= 1')
+    .group('students.id, student_courses.id')
+    .where('student_courses.score >= 80')
     .order('student_courses.score')
   }
 
