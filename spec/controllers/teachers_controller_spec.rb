@@ -83,7 +83,7 @@ RSpec.describe TeachersController, type: :controller do
     let(:student) { Fabricate(:student) }
     let(:course) { Fabricate(:course, teacher: teacher) }
     let!(:student_course) { Fabricate(:student_course, student: student, teacher: teacher, course: course) }
-    let!(:teacher_rating) { Fabricate(:teacher_rating, student: student, teacher: teacher, rating: 5 ) }
+    let!(:teacher_rating) { Fabricate(:teacher_rating, student: student, teacher: teacher, rating: 2 ) }
 
     before { post :score_student, params: { score: 70, student_id: student.id, id: teacher.id, course_id: course.id} }
 

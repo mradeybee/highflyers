@@ -10,9 +10,7 @@ class Student < ApplicationRecord
 
   def highflyer?
     student_courses.where('score >= ?', 80).detect do |course|
-      course.teacher_ratings.detect do |teacher_ratings|
-        teacher_ratings.rating >= 4
-      end.present?
+      course.teacher.teacher_ratings.average(:rating).to_f >= 1
     end.present?
   end
 end
