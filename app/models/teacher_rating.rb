@@ -3,8 +3,7 @@ class TeacherRating < ApplicationRecord
   belongs_to :teacher
 
   validates_presence_of :teacher_id, :student_id, :rating
-  validates :rating, numericality: { greater_than_or_equal_to: -4, less_than_or_equal_to: 4,  only_integer: true }#, message: "can't be greater that 2 and less that -2"
-
+  validates :rating, numericality: { greater_than_or_equal_to: -4, less_than_or_equal_to: 4, only_integer: true }
   before_save :validate_rating
 
   private
