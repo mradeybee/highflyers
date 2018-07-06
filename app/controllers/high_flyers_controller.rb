@@ -12,23 +12,6 @@ class HighFlyersController < ApplicationController
     end
   end
 
-  def rate
-    rating = Highflyer.rate_teacher(
-      teacher_id: highflyer_params[:teacher_id],
-      rating: highflyer_params[:rating],
-      number:  highflyer_params[:id]
-    )
-
-    if rating.errors.present?
-      render(
-        json: { errors: rating.errors.full_messages.join(', ') },
-        status: :unprocessable_entity
-      )
-    else
-      render json: { rating: rating }, status: :created
-    end
-  end
-
   private
 
   def highflyer_params
