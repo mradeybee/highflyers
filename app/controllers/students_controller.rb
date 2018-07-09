@@ -1,8 +1,8 @@
 class StudentsController < ApplicationController
   def index
     render json: Student.all,
-      each_serializer: StudentSerializer,
-      status: :ok
+           each_serializer: StudentSerializer,
+           status: :ok
   end
 
   def create

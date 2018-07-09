@@ -27,4 +27,3 @@ class CourseSerializer < ActiveModel::Serializer
     end
   end
 end
-  

@@ -13,17 +13,13 @@ class HighFlyersController < ApplicationController
   end
 
   def rate
-    rating = Highflyer.rate_teacher(
-      teacher_id: highflyer_params[:teacher_id],
-      rating: highflyer_params[:rating],
-      id:  highflyer_params[:id]
-    )
+    rating = Highflyer.rate_teacher(teacher_id: highflyer_params[:teacher_id],
+                                    rating: highflyer_params[:rating],
+                                    id: highflyer_params[:id])
 
     if rating.errors.present?
-      render(
-        json: { errors: rating.errors.full_messages.join(', ') },
-        status: :unprocessable_entity
-      )
+      render json: { errors: rating.errors.full_messages.join(', ') },
+             status: :unprocessable_entity
     else
       render json: rating, serializer: TeacherRatingSerializer, status: :created
     end

@@ -1,8 +1,8 @@
 class TeachersController < ApplicationController
   def index
     render json: Teacher.all,
-               each_serializer: TeacherSerializer,
-               status: :ok
+           each_serializer: TeacherSerializer,
+           status: :ok
   end
 
   def create

@@ -50,8 +50,6 @@ RSpec.describe HighFlyersController, type: :controller do
 
       it 'returns correct data' do
         response_data = JSON.parse(response.body)
-        
-        
 
         expect(response_data['student']['id']).to eql student.id
         expect(response_data['teacher']['id']).to eql teacher.id
