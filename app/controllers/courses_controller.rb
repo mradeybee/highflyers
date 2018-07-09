@@ -1,6 +1,10 @@
 class CoursesController < ApplicationController
   def index
-    render json: { courses: Course.all }, status: :ok
+    render(
+      json: Course.all,
+      each_serializer: CourseSerializer,
+      status: :ok
+    )
   end
 
   def create
@@ -12,7 +16,7 @@ class CoursesController < ApplicationController
         status: :unprocessable_entity
       )
     else
-      render json: { course: course }, status: :created
+      render json: course, serializer: CourseSerializer, status: :created
     end
   end
 
@@ -25,7 +29,8 @@ class CoursesController < ApplicationController
         status: :unprocessable_entity
       )
     else
-      render json: { registration: students_course }, status: :created
+      render json: students_course, serializer: StudentCoursesSerializer,
+             status: :created
     end
   end
 

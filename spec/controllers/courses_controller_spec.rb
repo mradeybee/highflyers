@@ -12,7 +12,7 @@ RSpec.describe CoursesController, type: :controller do
     end
 
     it 'returns students data count' do
-      expect(JSON.parse(response.body)['courses'].count).to eq 5
+      expect(JSON.parse(response.body).count).to eq 5
     end
   end
 
@@ -29,9 +29,9 @@ RSpec.describe CoursesController, type: :controller do
       it 'returns course details' do
         response_data = JSON.parse(response.body)
 
-        expect(response_data['course']['code']).to eql 'C101'
-        expect(response_data['course']['name']).to eql 'Course 101'
-        expect(response_data['course']['teacher_id']).to eql teacher.id
+        expect(response_data['code']).to eql 'C101'
+        expect(response_data['name']).to eql 'Course 101'
+        expect(response_data['teacher']['id']).to eql teacher.id
       end
     end
 
@@ -82,8 +82,8 @@ RSpec.describe CoursesController, type: :controller do
       it 'returns students data count' do
         response_data = JSON.parse(response.body)
 
-        expect(response_data['registration']['course_id']).to eql course.id
-        expect(response_data['registration']['teacher_id']).to eql course.teacher.id
+        expect(response_data['course']['id']).to eql course.id
+        expect(response_data['teacher']['id']).to eql course.teacher.id
       end
     end
 

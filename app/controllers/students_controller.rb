@@ -1,6 +1,8 @@
 class StudentsController < ApplicationController
   def index
-    render json: { students: Student.all }, status: :ok
+    render json: Student.all,
+           each_serializer: StudentSerializer,
+           status: :ok
   end
 
   def create
@@ -12,7 +14,7 @@ class StudentsController < ApplicationController
         status: :unprocessable_entity
       )
     else
-      render json: { student: student }, status: :created
+      render json: student, serializer: StudentSerializer, status: :created
     end
   end
 
@@ -25,7 +27,7 @@ class StudentsController < ApplicationController
         status: :unprocessable_entity
       )
     else
-      render json: { rating: rating }, status: :created
+      render json: rating, serializer: TeacherRatingSerializer, status: :created
     end
   end
 
