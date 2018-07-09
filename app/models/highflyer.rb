@@ -9,14 +9,13 @@ class Highflyer < Student
   end
 
   def self.at_position(number)
-    
     position = number.is_a?(String) ? number.to_i : number
     offset(position - 1).first
   end
 
   def self.rate_teacher(teacher_id:, rating:, id:)
-    teacher = Teacher.find_by_id(teacher_id)
-    student_id = at_position(id).try(:id)
-    TeacherRating.create(student_id: student_id, teacher: teacher, rating: rating)
+    TeacherRating.create(student_id: at_position(id).try(:id),
+                         teacher: Teacher.find_by_id(teacher_id),
+                         rating: rating)
   end
 end

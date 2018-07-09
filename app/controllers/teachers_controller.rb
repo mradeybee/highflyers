@@ -27,7 +27,9 @@ class TeachersController < ApplicationController
         status: :unprocessable_entity
       )
     else
-      render json: result, serializer: StudentCoursesSerializer, status: :created
+      render json: result,
+             serializer: StudentCoursesSerializer,
+             status: :created
     end
   end
 

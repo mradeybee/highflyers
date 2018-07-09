@@ -16,7 +16,7 @@ class TeacherRating < ApplicationRecord
   end
 
   def rating_is_in_range
-    if (rating.to_i > 2 || rating.to_i < -2)
+    if rating.to_i > 2 || rating.to_i < -2
       errors.add(:rating, "can't be greater that 2 and less that -2")
     end
   end

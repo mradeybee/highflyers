@@ -7,7 +7,6 @@ class StudentSerializer < ActiveModel::Serializer
     object.student_courses.map do |student_course|
       course = student_course.course
       teacher = course.teacher
-
       {
         id: course.id,
         name: course.name,
