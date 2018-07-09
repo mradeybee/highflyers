@@ -33,7 +33,7 @@ class TeacherSerializer < ActiveModel::Serializer
   end
 
   def courses
-    course = object.courses.map do |course|
+    object.courses.map do |course|
       {
         id: course.id,
         name: course.name,
