@@ -296,15 +296,25 @@
 <blockquote>
 <p>Response:</p>
 </blockquote>
-<pre class="highlight ruby tab-ruby"><code>  <span class="p">{</span>
-      <span class="s2">"highflyer"</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Firstname Lastname"</span><span class="p">,</span>
-          <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"student@email.com"</span><span class="p">,</span>
-          <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2018-07-04T13:54:01.559Z"</span><span class="p">,</span>
-          <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2018-07-04T13:54:01.559Z"</span>
+<pre class="highlight ruby tab-ruby"><code><span class="p">{</span>
+  <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Student Name"</span><span class="p">,</span>
+  <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"student@email.com"</span><span class="p">,</span>
+  <span class="s2">"courses"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Social Sciences"</span><span class="p">,</span>
+      <span class="s2">"code"</span><span class="p">:</span> <span class="s2">"SSC103"</span><span class="p">,</span>
+      <span class="s2">"course_score"</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
+      <span class="s2">"teacher"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Teacher Name"</span><span class="p">,</span>
+        <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"teacher@email.com"</span><span class="p">,</span>
+        <span class="s2">"average_rating"</span><span class="p">:</span> <span class="mi">1</span><span class="o">.</span><span class="mo">055342467</span><span class="mi">83</span>
       <span class="p">}</span>
-  <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
 </code></pre>
 <blockquote>
 <p>Request: Rate Teacher as Highflyer</p>
@@ -318,18 +328,22 @@
 <blockquote>
 <p>Response:</p>
 </blockquote>
-<pre class="highlight ruby tab-ruby"><code>  <span class="p">{</span>
-    <span class="s2">"rating"</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s2">"student_id"</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
-        <span class="s2">"teacher_id"</span><span class="p">:</span> <span class="mi">345</span><span class="p">,</span>
-        <span class="s2">"rating"</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
-        <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2018-07-06T07:13:22.778Z"</span><span class="p">,</span>
-        <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2018-07-06T07:13:22.778Z"</span>
+<pre class="highlight ruby tab-ruby"><code> <span class="p">{</span>
+    <span class="s2">"rating"</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="s2">"teacher"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="mi">345</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Firstname Lastname"</span><span class="p">,</span>
+        <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"teacher@email.com"</span><span class="p">,</span>
+        <span class="s2">"average_rating"</span><span class="p">:</span> <span class="mi">4</span>
+    <span class="p">},</span>
+    <span class="s2">"student"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Student Name"</span><span class="p">,</span>
+        <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"student@email.com"</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre>
-<p>A high flyer is a student who scores 80 and above in a course taught by a teacher who has 4 star or 5 star rating</p>
+<p>A high flyer is a student who scores 80 and above in a course taught by a teacher who has a cumulative average rating of 1</p>
 <h3 id='get-the-high-flyer-at-a-given-position'>Get the high flyer at a given position</h3>
 <aside>
   GET https://highflyers.herokuapp.com/high_flyers/:id
@@ -349,24 +363,27 @@
 <blockquote>
 <p>Response:</p>
 </blockquote>
-<pre class="highlight ruby tab-ruby"><code>  <span class="p">{</span>
-    <span class="s2">"students"</span><span class="p">:</span> <span class="p">[</span>
+<pre class="highlight ruby tab-ruby"><code>  <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Student Name"</span><span class="p">,</span>
+      <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"student@email.com"</span><span class="p">,</span>
+      <span class="s2">"courses"</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
           <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Firstname Lastname"</span><span class="p">,</span>
-          <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"student1@email.com"</span><span class="p">,</span>
-          <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2018-07-04T13:54:01.559Z"</span><span class="p">,</span>
-          <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2018-07-04T13:54:01.559Z"</span>
-      <span class="p">},</span>
-      <span class="p">{</span>
-          <span class="s2">"id"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Firstname Lastname"</span><span class="p">,</span>
-          <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"student2@email.com"</span><span class="p">,</span>
-          <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2018-07-04T13:54:01.559Z"</span><span class="p">,</span>
-          <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2018-07-04T13:54:01.559Z"</span>
-      <span class="p">}</span>
-    <span class="p">]</span>
-  <span class="p">}</span>
+          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Social Sciences"</span><span class="p">,</span>
+          <span class="s2">"code"</span><span class="p">:</span> <span class="s2">"SSC103"</span><span class="p">,</span>
+          <span class="s2">"course_score"</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
+          <span class="s2">"teacher"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Teacher Name"</span><span class="p">,</span>
+            <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"teacher@email.com"</span><span class="p">,</span>
+            <span class="s2">"average_rating"</span><span class="p">:</span> <span class="mi">1</span><span class="o">.</span><span class="mo">05</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
 </code></pre>
 <blockquote>
 <p>Request: Create Student</p>
@@ -379,14 +396,11 @@
 <p>Response:</p>
 </blockquote>
 <pre class="highlight ruby tab-ruby"><code>  <span class="p">{</span>
-    <span class="s2">"student"</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Firstname Lastname"</span><span class="p">,</span>
-        <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"student3@email.com"</span><span class="p">,</span>
-        <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2018-07-04T13:54:01.559Z"</span><span class="p">,</span>
-        <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2018-07-04T13:54:01.559Z"</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Firstname Lastname"</span><span class="p">,</span>
+    <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"student3@email.com"</span><span class="p">,</span>
+    <span class="s2">"courses"</span><span class="p">:</span> <span class="p">[]</span>
+<span class="p">}</span>
 </code></pre>
 <blockquote>
 <p>Request: Rate a teacher as a student</p>
@@ -398,15 +412,19 @@
 <blockquote>
 <p>Response:</p>
 </blockquote>
-<pre class="highlight ruby tab-ruby"><code>  <span class="p">{</span>
-    <span class="s2">"rating"</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s2">"student_id"</span><span class="p">:</span> <span class="mi">890</span><span class="p">,</span>
-        <span class="s2">"teacher_id"</span><span class="p">:</span> <span class="mi">345</span><span class="p">,</span>
-        <span class="s2">"rating"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-        <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2018-07-06T07:13:22.778Z"</span><span class="p">,</span>
-        <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2018-07-06T07:13:22.778Z"</span>
-    <span class="p">}</span>
+<pre class="highlight ruby tab-ruby"><code><span class="p">{</span>
+  <span class="s2">"rating"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="s2">"teacher"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">345</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Firstname Lastname"</span><span class="p">,</span>
+      <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"teacher@email.com"</span><span class="p">,</span>
+      <span class="s2">"average_rating"</span><span class="p">:</span> <span class="mi">4</span>
+  <span class="p">},</span>
+  <span class="s2">"student"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Student Name"</span><span class="p">,</span>
+      <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"student@email.com"</span>
+  <span class="p">}</span>
 <span class="p">}</span>
 </code></pre><h3 id='get-all-students'>Get all students</h3>
 <aside>
@@ -431,24 +449,39 @@
 <blockquote>
 <p>Response:</p>
 </blockquote>
-<pre class="highlight ruby tab-ruby"><code>  <span class="p">{</span>
-    <span class="s2">"teachers"</span><span class="p">:</span> <span class="p">[</span>
-        <span class="p">{</span>
-          <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Firstname Lastname"</span><span class="p">,</span>
-          <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"teacher1@email.com"</span><span class="p">,</span>
-          <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2018-07-04T13:54:01.559Z"</span><span class="p">,</span>
-          <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2018-07-04T13:54:01.559Z"</span>
-      <span class="p">},</span>
-      <span class="p">{</span>
-          <span class="s2">"id"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Firstname Lastname"</span><span class="p">,</span>
-          <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"teacher2@email.com"</span><span class="p">,</span>
-          <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2018-07-04T13:54:01.559Z"</span><span class="p">,</span>
-          <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2018-07-04T13:54:01.559Z"</span>
-      <span class="p">}</span>
-    <span class="p">]</span>
-  <span class="p">}</span>
+<pre class="highlight ruby tab-ruby"><code>  <span class="p">[</span>
+    <span class="p">{</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Teacher Name"</span><span class="p">,</span>
+        <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"teacher@email.com"</span><span class="p">,</span>
+        <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2018-07-04T13:54:33.574Z"</span><span class="p">,</span>
+        <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2018-07-04T13:54:33.574Z"</span><span class="p">,</span>
+        <span class="s2">"average_rating"</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+        <span class="s2">"students"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Student Name"</span><span class="p">,</span>
+                <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"student@email.com"</span><span class="p">,</span>
+                <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2018-07-04T13:54:01.559Z"</span><span class="p">,</span>
+                <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2018-07-04T13:54:01.559Z"</span>
+            <span class="p">}</span>
+        <span class="p">],</span>
+        <span class="s2">"courses"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="s2">"code"</span><span class="p">:</span> <span class="s2">"SSC103"</span><span class="p">,</span>
+                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Social Sciences"</span><span class="p">,</span>
+                <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2018-07-04T13:56:53.977Z"</span><span class="p">,</span>
+                <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2018-07-04T13:56:53.977Z"</span>
+            <span class="p">}</span>
+        <span class="p">],</span>
+        <span class="s2">"teacher_ratings"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s2">"rating"</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
 </code></pre>
 <blockquote>
 <p>Request: Create a teacher</p>
@@ -460,15 +493,17 @@
 <blockquote>
 <p>Response:</p>
 </blockquote>
-<pre class="highlight ruby tab-ruby"><code>  <span class="p">{</span>
-    <span class="s2">"teacher"</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Firstname Lastname"</span><span class="p">,</span>
-        <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"teacher3@email.com"</span><span class="p">,</span>
-        <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2018-07-04T13:54:01.559Z"</span><span class="p">,</span>
-        <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2018-07-04T13:54:01.559Z"</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
+<pre class="highlight ruby tab-ruby"><code> <span class="p">{</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Firstname Lastname"</span><span class="p">,</span>
+    <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"teacher3@email.com"</span><span class="p">,</span>
+    <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2018-07-08T20:39:53.896Z"</span><span class="p">,</span>
+    <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2018-07-08T20:39:53.896Z"</span><span class="p">,</span>
+    <span class="s2">"average_rating"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"students"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"courses"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"teacher_ratings"</span><span class="p">:</span> <span class="p">[]</span>
+<span class="p">}</span>
 </code></pre>
 <blockquote>
 <p>Request: Score a student on a course</p>
@@ -481,16 +516,24 @@
 <p>Response:</p>
 </blockquote>
 <pre class="highlight ruby tab-ruby"><code>  <span class="p">{</span>
-    <span class="s2">"result"</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-      <span class="s2">"student_id"</span><span class="p">:</span> <span class="mi">345</span><span class="p">,</span>
-      <span class="s2">"course_id"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-      <span class="s2">"teacher_id"</span><span class="p">:</span> <span class="mi">890</span><span class="p">,</span>
-      <span class="s2">"score"</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
-      <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2018-07-04T14:38:22.982Z"</span><span class="p">,</span>
-      <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2018-07-06T07:45:13.466Z"</span>
+    <span class="s2">"score"</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
+    <span class="s2">"teatcher"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="mi">890</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Teacher Name"</span><span class="p">,</span>
+        <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"teacher@email.com"</span><span class="p">,</span>
+        <span class="s2">"average_rating"</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="p">},</span>
+    <span class="s2">"course"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Social Sciences"</span><span class="p">,</span>
+        <span class="s2">"code"</span><span class="p">:</span> <span class="s2">"SSC103"</span>
+    <span class="p">},</span>
+    <span class="s2">"student"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="mi">345</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Student Name"</span><span class="p">,</span>
+        <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"student@email.com"</span>
     <span class="p">}</span>
-  <span class="p">}</span>
+<span class="p">}</span>
 </code></pre><h3 id='get-all-teachers'>Get all Teachers</h3>
 <aside>
   GET https://highflyers.herokuapp.com/teachers
@@ -514,26 +557,30 @@
 <blockquote>
 <p>Response:</p>
 </blockquote>
-<pre class="highlight ruby tab-ruby"><code>  <span class="p">{</span>
-    <span class="s2">"courses"</span><span class="p">:</span> <span class="p">[</span>
-        <span class="p">{</span>
-          <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Social Sciences"</span><span class="p">,</span>
-          <span class="s2">"teacher_id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-          <span class="s2">"code"</span><span class="p">:</span> <span class="s2">"SSC103"</span><span class="p">,</span>
-          <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2018-07-04T13:56:53.977Z"</span><span class="p">,</span>
-          <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2018-07-04T13:56:53.977Z"</span>
+<pre class="highlight ruby tab-ruby"><code> <span class="p">[</span>
+    <span class="p">{</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="mi">453</span><span class="p">,</span>
+        <span class="s2">"code"</span><span class="p">:</span> <span class="s2">"SSC103"</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Social Sciences"</span><span class="p">,</span>
+        <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2018-07-04T13:56:53.977Z"</span><span class="p">,</span>
+        <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2018-07-04T13:56:53.977Z"</span><span class="p">,</span>
+        <span class="s2">"teacher"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">321</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Teacher Name"</span><span class="p">,</span>
+            <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"teacher@email.com"</span><span class="p">,</span>
+            <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2018-07-04T13:54:33.574Z"</span><span class="p">,</span>
+            <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2018-07-04T13:54:33.574Z"</span>
         <span class="p">},</span>
-        <span class="p">{</span>
-          <span class="s2">"id"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Social Maths"</span><span class="p">,</span>
-          <span class="s2">"teacher_id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-          <span class="s2">"code"</span><span class="p">:</span> <span class="s2">"SSM103"</span><span class="p">,</span>
-          <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2018-07-04T13:56:53.977Z"</span><span class="p">,</span>
-          <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2018-07-04T13:56:53.977Z"</span>
-        <span class="p">}</span>
-    <span class="p">]</span>
-<span class="p">}</span>
+        <span class="s2">"students"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s2">"id"</span><span class="p">:</span> <span class="mi">319</span><span class="p">,</span>
+                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Student Name"</span><span class="p">,</span>
+                <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"student@email.com"</span><span class="p">,</span>
+                <span class="s2">"course_score"</span><span class="p">:</span> <span class="mi">80</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">]</span>
 </code></pre>
 <blockquote>
 <p>Request: Create a course</p>
@@ -546,15 +593,20 @@
 <p>Response:</p>
 </blockquote>
 <pre class="highlight ruby tab-ruby"><code>  <span class="p">{</span>
-    <span class="s2">"course"</span><span class="p">:</span>  <span class="p">{</span>
-      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Oral English"</span><span class="p">,</span>
-      <span class="s2">"teacher_id"</span><span class="p">:</span> <span class="mi">349</span><span class="p">,</span>
-      <span class="s2">"code"</span><span class="p">:</span> <span class="s2">"OE100"</span><span class="p">,</span>
-      <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2018-07-04T13:56:53.977Z"</span><span class="p">,</span>
-      <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2018-07-04T13:56:53.977Z"</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="mi">454</span><span class="p">,</span>
+        <span class="s2">"code"</span><span class="p">:</span> <span class="s2">"OE100"</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Oral Englis"</span><span class="p">,</span>
+        <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2018-07-04T13:56:53.977Z"</span><span class="p">,</span>
+        <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2018-07-04T13:56:53.977Z"</span><span class="p">,</span>
+        <span class="s2">"teacher"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">349</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Teacher Name"</span><span class="p">,</span>
+            <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"teacher@email.com"</span><span class="p">,</span>
+            <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2018-07-04T13:54:33.574Z"</span><span class="p">,</span>
+            <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2018-07-04T13:54:33.574Z"</span>
+        <span class="p">},</span>
+        <span class="s2">"students"</span><span class="p">:</span> <span class="p">[]</span>
     <span class="p">}</span>
-  <span class="p">}</span>
 </code></pre>
 <blockquote>
 <p>Request: Register for a course as a student</p>
@@ -565,17 +617,25 @@
 <blockquote>
 <p>Response:</p>
 </blockquote>
-<pre class="highlight ruby tab-ruby"><code>  <span class="p">{</span>
-    <span class="s2">"registration"</span><span class="p">:</span> <span class="p">{</span>
+<pre class="highlight ruby tab-ruby"><code> <span class="p">{</span>
+  <span class="s2">"score"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"teacher"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Teacher Name"</span><span class="p">,</span>
+      <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"teacher@mail.com"</span><span class="p">,</span>
+      <span class="s2">"average_rating"</span><span class="p">:</span> <span class="mi">0</span>
+  <span class="p">},</span>
+  <span class="s2">"course"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"CODING 101"</span><span class="p">,</span>
+      <span class="s2">"code"</span><span class="p">:</span> <span class="s2">"C102"</span>
+  <span class="p">},</span>
+  <span class="s2">"student"</span><span class="p">:</span> <span class="p">{</span>
       <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-      <span class="s2">"student_id"</span><span class="p">:</span> <span class="mi">345</span><span class="p">,</span>
-      <span class="s2">"course_id"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-      <span class="s2">"teacher_id"</span><span class="p">:</span> <span class="mi">890</span><span class="p">,</span>
-      <span class="s2">"score"</span><span class="p">:</span> <span class="kp">nil</span><span class="p">,</span>
-      <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2018-07-04T14:38:22.982Z"</span><span class="p">,</span>
-      <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2018-07-06T07:45:13.466Z"</span>
-    <span class="p">}</span>
+      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Student Name"</span><span class="p">,</span>
+      <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"student@email.com"</span>
   <span class="p">}</span>
+<span class="p">}</span>
 </code></pre><h3 id='get-all-courses'>Get all Courses</h3>
 <aside>
   GET https://highflyers.herokuapp.com/courses

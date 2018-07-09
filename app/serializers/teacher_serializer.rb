@@ -11,6 +11,12 @@ class TeacherSerializer < ActiveModel::Serializer
   end
 
   def students
-    object.students
+    object.students.map do |student|
+      {
+        id: student.id,
+        name: student.name,
+        email: student.email
+      }
+    end
   end
 end
