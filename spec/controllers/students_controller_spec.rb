@@ -13,7 +13,7 @@ RSpec.describe StudentsController, type: :controller do
     end
 
     it 'returns students data' do
-      expect(JSON.parse(response.body)['students'].count).to eq 5
+      expect(JSON.parse(response.body).count).to eq 5
     end
   end
 
@@ -28,9 +28,9 @@ RSpec.describe StudentsController, type: :controller do
       it 'returns student details' do
         response_data = JSON.parse(response.body)
 
-        expect(response_data['student']['id'].present?).to be true
-        expect(response_data['student']['name']).to eql 'Student Name'
-        expect(response_data['student']['email']).to eql 'student@email.com'
+        expect(response_data['id'].present?).to be true
+        expect(response_data['name']).to eql 'Student Name'
+        expect(response_data['email']).to eql 'student@email.com'
       end
     end
 
@@ -90,10 +90,10 @@ RSpec.describe StudentsController, type: :controller do
 
     it 'returns students data' do
       response_data = JSON.parse(response.body)
-
-      expect(response_data['rating']['student_id']).to eql student.id
-      expect(response_data['rating']['teacher_id']).to eql teacher.id
-      expect(response_data['rating']['rating']).to eql 2
+      
+      expect(response_data['student']['id']).to eql student.id
+      expect(response_data['teacher']['id']).to eql teacher.id
+      expect(response_data['rating']).to eql 2
     end
   end
 end
