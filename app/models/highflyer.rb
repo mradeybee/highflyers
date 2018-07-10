@@ -1,12 +1,5 @@
 class Highflyer < Student
-  default_scope do
-    joins(:student_courses)
-      .joins(teachers: :teacher_ratings)
-      .having('AVG(teacher_ratings.rating) >= 1')
-      .group('students.id, student_courses.id')
-      .where('student_courses.score >= 80')
-      .order('student_courses.score')
-  end
+  self.table_name = 'high_flyer'
 
   def self.at_position(number)
     position = number.is_a?(String) ? number.to_i : number
@@ -17,5 +10,11 @@ class Highflyer < Student
     TeacherRating.create(student_id: at_position(id).try(:id),
                          teacher: Teacher.find_by_id(teacher_id),
                          rating: rating)
+  end
+
+  protected
+
+  def readonly?
+    true
   end
 end
