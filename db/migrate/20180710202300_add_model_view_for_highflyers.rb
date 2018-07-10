@@ -15,7 +15,6 @@ class AddModelViewForHighflyers < ActiveRecord::Migration[5.1]
       GROUP BY students.id, student_courses.id
       HAVING (AVG(teacher_ratings.rating) >= 1)
       ORDER BY student_courses.score DESC
-      LIMIT 1
     )
   end
 
