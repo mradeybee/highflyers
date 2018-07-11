@@ -3,7 +3,7 @@ class HighFlyersController < ApplicationController
     highflyer = Highflyer.at_position(highflyer_params[:id])
 
     if highflyer.present?
-      render json: highflyer, serializer: StudentSerializer, status: :ok
+      render json: highflyer, serializer: HighflyerSerializer, status: :ok
     else
       render(
         json: { message: 'There is no highflyer at this position' },
