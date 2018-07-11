@@ -1,6 +1,4 @@
 class Highflyer < ActiveRecord::Base
-  self.table_name = 'high_flyer'
-
   def self.at_position(number)
     position = number.is_a?(String) ? number.to_i : number
     offset(position - 1).first

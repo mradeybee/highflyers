@@ -1,6 +1,6 @@
 class AddModelViewForHighflyers < ActiveRecord::Migration[5.1]
   def up
-    connection.execute %(CREATE OR REPLACE VIEW high_flyer AS
+    connection.execute %(CREATE OR REPLACE VIEW highflyers AS
       SELECT  "students".*
       FROM "students"
         INNER JOIN "student_courses"
@@ -19,6 +19,6 @@ class AddModelViewForHighflyers < ActiveRecord::Migration[5.1]
   end
 
   def down
-    connection.execute 'DROP VIEW IF EXISTS high_flyer;'
+    connection.execute 'DROP VIEW IF EXISTS highflyers;'
   end
 end
