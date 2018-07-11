@@ -9,7 +9,7 @@ RSpec.describe HighFlyersController, type: :controller do
   let!(:teacher_rating1) { Fabricate(:teacher_rating, teacher: teacher, rating: 2) }
   let!(:teacher_rating2) { Fabricate(:teacher_rating, teacher: teacher, rating: 2) }
 
-  xdescribe 'GET #show' do
+  describe 'GET #show' do
     context 'available position' do
       before { get :show, params: { id: 1 } }
 
@@ -40,7 +40,7 @@ RSpec.describe HighFlyersController, type: :controller do
     end
   end
 
-  xdescribe 'POST #rate' do
+  describe 'POST #rate' do
     context 'valid data' do
       before { post :rate, params: { id: 1, teacher_id: teacher.id, rating: 2 } }
 
