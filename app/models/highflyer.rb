@@ -1,4 +1,4 @@
-class Highflyer < Student
+class Highflyer < ActiveRecord::Base
   self.table_name = 'high_flyer'
 
   def self.at_position(number)
